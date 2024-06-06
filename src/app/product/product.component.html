@@ -1,0 +1,51 @@
+<input
+    type="text"
+    name="search"
+    placeholder="Search the product"
+    [(ngModel)]="name"
+    (ngModelChange) = "onNameChange($event)"
+/>
+
+
+
+<div *ngIf="showTable && fProducts.length > 0; else elseBlock">
+    <h1>A Product Table</h1>
+    <table id="customers">
+        <tr>
+            <th>
+                <button class="button" (click)="toggleImage()">Toggle Image</button>
+            </th>
+            <th>productId</th>
+            <th>productName</th>
+            <th>productCode</th>
+            <th>releaseDate</th>
+            <th>description</th>
+            <th>price</th>
+            <th>starRating</th>
+        </tr>
+        <tr *ngFor="let data of fProducts">
+            <td>
+                <img *ngIf="showImage" style="width: 100px; height: 100px;" [src]='data.imageUrl' alt="Girl in a jacket" width="500" height="600">
+            </td>
+            <td>{{data.productId}}</td>
+            <td>{{data.productName}}</td>
+            <td>{{data.productCode | convertToSpace:"-" | lowercase }}</td>
+            <td>{{data.releaseDate}}</td>
+            <td>{{data.description | uppercase}}</td>
+            <td>{{data.price | currency }}</td>
+            <td>{{data.starRating}}</td>
+            </tr>
+    </table>
+
+</div>
+
+
+<ng-template #elseBlock>
+    <h1 appAppBgColorGreen>
+       No Product Found....
+    </h1>
+</ng-template>
+
+<h2 appAppBgColorGreen>Contact Us: Archit Goyal</h2>
+
+<h3 appAppBgColorGreen>Thank You</h3>
